@@ -1,0 +1,41 @@
+package dataAccess.concrete;
+
+import java.util.ArrayList;
+
+import dataAccess.abstracts.IUserDao;
+import entity.concrete.User;
+
+public class UserDao implements IUserDao {
+
+    private static ArrayList<User> userList;
+
+    public UserDao() {
+        userList = new ArrayList<>();
+    }
+
+    @Override
+    public void add(User user) {
+        System.out.println(user.getFirstName()+" "+user.getLastName() + " kayýt oldu");
+        userList.add(user);
+
+    }
+
+    @Override
+    public boolean isEmailExist(User user) {
+        if (userList == null) {
+            return false;
+        }
+        for (User users : userList) {
+            if (users.getEmail().equals(user.getEmail())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public ArrayList<User> getAll() {
+        return userList;
+    }
+
+}
